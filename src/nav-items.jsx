@@ -1,4 +1,4 @@
-import { LayoutDashboard, Apps, Users, Users2 } from "lucide-react";
+import { LayoutDashboard, AppWindow, Users, Users2 } from "lucide-react";
 import Index from "./pages/Index.jsx";
 import AppsList from "./pages/AppsList.jsx";
 import UsersList from "./pages/UsersList.jsx";
@@ -14,7 +14,7 @@ export const navItems = [
   {
     title: "Apps",
     to: "/apps",
-    icon: <Apps className="h-4 w-4" />,
+    icon: <AppWindow className="h-4 w-4" />,
     page: <AppsList />,
     subItems: [
       { title: "Manage", to: "/apps/manage" },
