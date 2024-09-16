@@ -9,9 +9,9 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 
 const AppsList = () => {
   const [apps, setApps] = useState([
-    { id: 1, name: 'App 1', version: '1.0.0', team: 'Team A' },
-    { id: 2, name: 'App 2', version: '2.1.0', team: 'Team B' },
-    { id: 3, name: 'App 3', version: '1.5.2', team: 'Team C' },
+    { id: 1, name: 'App 1', version: '1.0.0', team: 'Team A', namespace: 'namespace-1' },
+    { id: 2, name: 'App 2', version: '2.1.0', team: 'Team B', namespace: 'namespace-2' },
+    { id: 3, name: 'App 3', version: '1.5.2', team: 'Team C', namespace: 'namespace-3' },
   ]);
 
   const [editingApp, setEditingApp] = useState(null);
@@ -24,6 +24,7 @@ const AppsList = () => {
       name: formData.get('name'),
       version: formData.get('version'),
       team: formData.get('team'),
+      namespace: formData.get('namespace'),
     };
     setApps([...apps, newApp]);
   };
@@ -40,6 +41,7 @@ const AppsList = () => {
       name: formData.get('name'),
       version: formData.get('version'),
       team: formData.get('team'),
+      namespace: formData.get('namespace'),
     };
     setApps(apps.map(app => app.id === updatedApp.id ? updatedApp : app));
     setEditingApp(null);
@@ -61,7 +63,7 @@ const AppsList = () => {
           <DialogTrigger asChild>
             <Button>Upload New App</Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="sm:max-w-[600px]">
             <DialogHeader>
               <DialogTitle>Upload New App</DialogTitle>
             </DialogHeader>
@@ -91,6 +93,10 @@ const AppsList = () => {
                   </SelectContent>
                 </Select>
               </div>
+              <div>
+                <Label htmlFor="namespace">Namespace</Label>
+                <Input id="namespace" name="namespace" required />
+              </div>
               <Button type="submit">Upload</Button>
             </form>
           </DialogContent>
@@ -102,6 +108,7 @@ const AppsList = () => {
             <TableHead>Name</TableHead>
             <TableHead>Version</TableHead>
             <TableHead>Team</TableHead>
+            <TableHead>Namespace</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -111,12 +118,13 @@ const AppsList = () => {
               <TableCell>{app.name}</TableCell>
               <TableCell>{app.version}</TableCell>
               <TableCell>{app.team}</TableCell>
+              <TableCell>{app.namespace}</TableCell>
               <TableCell>
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button variant="outline" size="sm" className="mr-2" onClick={() => handleEdit(app)}>Edit</Button>
                   </DialogTrigger>
-                  <DialogContent>
+                  <DialogContent className="sm:max-w-[600px]">
                     <DialogHeader>
                       <DialogTitle>Edit App</DialogTitle>
                     </DialogHeader>
@@ -141,6 +149,10 @@ const AppsList = () => {
                             <SelectItem value="Team C">Team C</SelectItem>
                           </SelectContent>
                         </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="edit-namespace">Namespace</Label>
+                        <Input id="edit-namespace" name="namespace" defaultValue={editingApp?.namespace} required />
                       </div>
                       <Button type="submit">Update</Button>
                     </form>
