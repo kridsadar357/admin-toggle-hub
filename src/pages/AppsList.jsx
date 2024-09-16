@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import ImageUpload from '../components/ImageUpload';
 
 const AppsList = () => {
   const [apps, setApps] = useState([
@@ -15,6 +16,8 @@ const AppsList = () => {
   ]);
 
   const [editingApp, setEditingApp] = useState(null);
+  const [icon, setIcon] = useState(null);
+  const [screenshot, setScreenshot] = useState(null);
 
   const handleUpload = (event) => {
     event.preventDefault();
@@ -25,8 +28,12 @@ const AppsList = () => {
       version: formData.get('version'),
       team: formData.get('team'),
       namespace: formData.get('namespace'),
+      icon: icon,
+      screenshot: screenshot,
     };
     setApps([...apps, newApp]);
+    setIcon(null);
+    setScreenshot(null);
   };
 
   const handleEdit = (app) => {
@@ -68,10 +75,8 @@ const AppsList = () => {
               <DialogTitle className="text-2xl font-bold text-blue-600">Upload New App</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleUpload} className="space-y-4">
-              <div>
-                <Label htmlFor="apk" className="text-blue-600">APK File</Label>
-                <Input id="apk" name="apk" type="file" accept=".apk" required className="border-blue-300 focus:border-blue-500" />
-              </div>
+              <ImageUpload label="App Icon" onChange={setIcon} />
+              <ImageUpload label="App Screenshot" onChange={setScreenshot} />
               <div>
                 <Label htmlFor="name" className="text-blue-600">App Name</Label>
                 <Input id="name" name="name" required className="border-blue-300 focus:border-blue-500" />
