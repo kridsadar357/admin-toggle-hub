@@ -16,10 +16,6 @@ export const navItems = [
     to: "/apps",
     icon: <AppWindow className="h-4 w-4" />,
     page: <AppsList />,
-    subItems: [
-      { title: "Manage", to: "/apps/manage" },
-      { title: "Upload", to: "/apps/upload" },
-    ],
   },
   {
     title: "Users",
