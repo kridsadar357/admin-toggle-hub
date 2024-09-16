@@ -63,7 +63,7 @@ const AppsList = () => {
           <DialogTrigger asChild>
             <Button>Upload New App</Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[600px]">
+          <DialogContent className="sm:max-w-[700px]">
             <DialogHeader>
               <DialogTitle>Upload New App</DialogTitle>
             </DialogHeader>
@@ -124,7 +124,7 @@ const AppsList = () => {
                   <DialogTrigger asChild>
                     <Button variant="outline" size="sm" className="mr-2" onClick={() => handleEdit(app)}>Edit</Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[600px]">
+                  <DialogContent className="sm:max-w-[700px]">
                     <DialogHeader>
                       <DialogTitle>Edit App</DialogTitle>
                     </DialogHeader>
