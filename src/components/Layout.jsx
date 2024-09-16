@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { navItems } from '../nav-items';
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, LogOut } from "lucide-react";
 
 const Layout = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    navigate('/login');
+  };
+
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-blue-50">
       {/* Sidebar */}
       <aside className={`${isMenuOpen ? 'w-64' : 'w-16'} bg-white shadow-md transition-all duration-300`}>
         <Button
@@ -29,7 +35,7 @@ const Layout = () => {
               <li key={item.to} className="mb-2">
                 <Link
                   to={item.to}
-                  className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200"
+                  className="flex items-center px-4 py-2 text-blue-600 hover:bg-blue-100"
                 >
                   {item.icon}
                   {isMenuOpen && <span className="ml-2">{item.title}</span>}
@@ -38,6 +44,14 @@ const Layout = () => {
             ))}
           </ul>
         </nav>
+        <Button
+          onClick={handleLogout}
+          variant="ghost"
+          className="absolute bottom-4 left-4 text-blue-600 hover:bg-blue-100"
+        >
+          <LogOut className="mr-2 h-4 w-4" />
+          {isMenuOpen && "Logout"}
+        </Button>
       </aside>
 
       {/* Main content */}

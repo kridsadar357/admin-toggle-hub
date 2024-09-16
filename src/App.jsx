@@ -40,6 +40,7 @@ const App = () => {
                   ))
                 )}
             </Route>
+            <Route path="*" element={<Navigate to={isLoggedIn ? "/" : "/login"} replace />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
