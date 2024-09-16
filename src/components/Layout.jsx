@@ -18,14 +18,14 @@ const Layout = () => {
   };
 
   return (
-    <div className="flex h-screen bg-blue-50">
+    <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <aside className={`${isMenuOpen ? 'w-64' : 'w-16'} bg-white shadow-md transition-all duration-300`}>
+      <aside className={`${isMenuOpen ? 'w-64' : 'w-16'} bg-gray-800 text-white transition-all duration-300`}>
         <Button
           onClick={toggleMenu}
           variant="ghost"
           size="icon"
-          className="mt-4 ml-4"
+          className="mt-4 ml-4 text-white hover:bg-gray-700"
         >
           {isMenuOpen ? <ChevronLeft /> : <ChevronRight />}
         </Button>
@@ -35,7 +35,7 @@ const Layout = () => {
               <li key={item.to} className="mb-2">
                 <Link
                   to={item.to}
-                  className="flex items-center px-4 py-2 text-blue-600 hover:bg-blue-100"
+                  className="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white"
                 >
                   {item.icon}
                   {isMenuOpen && <span className="ml-2">{item.title}</span>}
@@ -47,7 +47,7 @@ const Layout = () => {
         <Button
           onClick={handleLogout}
           variant="ghost"
-          className="absolute bottom-4 left-4 text-blue-600 hover:bg-blue-100"
+          className="absolute bottom-4 left-4 text-gray-300 hover:bg-gray-700 hover:text-white"
         >
           <LogOut className="mr-2 h-4 w-4" />
           {isMenuOpen && "Logout"}
@@ -55,7 +55,7 @@ const Layout = () => {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 p-8 overflow-auto">
+      <main className="flex-1 p-8 overflow-auto bg-gray-100">
         <Outlet />
       </main>
     </div>

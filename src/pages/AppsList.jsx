@@ -17,7 +17,7 @@ const AppsList = () => {
 
   const [editingApp, setEditingApp] = useState(null);
   const [icon, setIcon] = useState(null);
-  const [screenshot, setScreenshot] = useState(null);
+  const [screenshots, setScreenshots] = useState([]);
 
   const handleUpload = (event) => {
     event.preventDefault();
@@ -29,11 +29,11 @@ const AppsList = () => {
       team: formData.get('team'),
       namespace: formData.get('namespace'),
       icon: icon,
-      screenshot: screenshot,
+      screenshots: screenshots,
     };
     setApps([...apps, newApp]);
     setIcon(null);
-    setScreenshot(null);
+    setScreenshots([]);
   };
 
   const handleEdit = (app) => {
@@ -63,32 +63,32 @@ const AppsList = () => {
   };
 
   return (
-    <div className="space-y-6 p-6 bg-blue-50">
+    <div className="space-y-6 p-6 bg-gray-100">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-blue-600">Apps</h1>
+        <h1 className="text-3xl font-bold text-gray-800">Apps</h1>
         <Dialog>
           <DialogTrigger asChild>
             <Button className="bg-blue-600 hover:bg-blue-700 text-white">Upload New App</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[700px]">
             <DialogHeader>
-              <DialogTitle className="text-2xl font-bold text-blue-600">Upload New App</DialogTitle>
+              <DialogTitle className="text-2xl font-bold text-gray-800">Upload New App</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleUpload} className="space-y-4">
               <ImageUpload label="App Icon" onChange={setIcon} />
-              <ImageUpload label="App Screenshot" onChange={setScreenshot} />
+              <ImageUpload label="App Screenshots" onChange={setScreenshots} multiple={true} />
               <div>
-                <Label htmlFor="name" className="text-blue-600">App Name</Label>
-                <Input id="name" name="name" required className="border-blue-300 focus:border-blue-500" />
+                <Label htmlFor="name" className="text-gray-700">App Name</Label>
+                <Input id="name" name="name" required className="border-gray-300 focus:border-blue-500" />
               </div>
               <div>
-                <Label htmlFor="version" className="text-blue-600">Version</Label>
-                <Input id="version" name="version" required className="border-blue-300 focus:border-blue-500" />
+                <Label htmlFor="version" className="text-gray-700">Version</Label>
+                <Input id="version" name="version" required className="border-gray-300 focus:border-blue-500" />
               </div>
               <div>
-                <Label htmlFor="team" className="text-blue-600">Team</Label>
+                <Label htmlFor="team" className="text-gray-700">Team</Label>
                 <Select name="team" required>
-                  <SelectTrigger className="border-blue-300 focus:border-blue-500">
+                  <SelectTrigger className="border-gray-300 focus:border-blue-500">
                     <SelectValue placeholder="Select a team" />
                   </SelectTrigger>
                   <SelectContent>
@@ -99,8 +99,8 @@ const AppsList = () => {
                 </Select>
               </div>
               <div>
-                <Label htmlFor="namespace" className="text-blue-600">Namespace</Label>
-                <Input id="namespace" name="namespace" required className="border-blue-300 focus:border-blue-500" />
+                <Label htmlFor="namespace" className="text-gray-700">Namespace</Label>
+                <Input id="namespace" name="namespace" required className="border-gray-300 focus:border-blue-500" />
               </div>
               <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white">Upload</Button>
             </form>
@@ -109,17 +109,17 @@ const AppsList = () => {
       </div>
       <Table>
         <TableHeader>
-          <TableRow className="bg-blue-100">
-            <TableHead className="text-blue-600">Name</TableHead>
-            <TableHead className="text-blue-600">Version</TableHead>
-            <TableHead className="text-blue-600">Team</TableHead>
-            <TableHead className="text-blue-600">Namespace</TableHead>
-            <TableHead className="text-blue-600">Actions</TableHead>
+          <TableRow className="bg-gray-200">
+            <TableHead className="text-gray-700">Name</TableHead>
+            <TableHead className="text-gray-700">Version</TableHead>
+            <TableHead className="text-gray-700">Team</TableHead>
+            <TableHead className="text-gray-700">Namespace</TableHead>
+            <TableHead className="text-gray-700">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {apps.map((app) => (
-            <TableRow key={app.id} className="hover:bg-blue-50">
+            <TableRow key={app.id} className="hover:bg-gray-50">
               <TableCell>{app.name}</TableCell>
               <TableCell>{app.version}</TableCell>
               <TableCell>{app.team}</TableCell>
@@ -127,25 +127,25 @@ const AppsList = () => {
               <TableCell>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="outline" size="sm" className="mr-2 text-blue-600 border-blue-300 hover:bg-blue-100" onClick={() => handleEdit(app)}>Edit</Button>
+                    <Button variant="outline" size="sm" className="mr-2 text-blue-600 border-blue-300 hover:bg-blue-50" onClick={() => handleEdit(app)}>Edit</Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[700px]">
                     <DialogHeader>
-                      <DialogTitle className="text-2xl font-bold text-blue-600">Edit App</DialogTitle>
+                      <DialogTitle className="text-2xl font-bold text-gray-800">Edit App</DialogTitle>
                     </DialogHeader>
                     <form onSubmit={handleUpdate} className="space-y-4">
                       <div>
-                        <Label htmlFor="edit-name" className="text-blue-600">App Name</Label>
-                        <Input id="edit-name" name="name" defaultValue={editingApp?.name} required className="border-blue-300 focus:border-blue-500" />
+                        <Label htmlFor="edit-name" className="text-gray-700">App Name</Label>
+                        <Input id="edit-name" name="name" defaultValue={editingApp?.name} required className="border-gray-300 focus:border-blue-500" />
                       </div>
                       <div>
-                        <Label htmlFor="edit-version" className="text-blue-600">Version</Label>
-                        <Input id="edit-version" name="version" defaultValue={editingApp?.version} required className="border-blue-300 focus:border-blue-500" />
+                        <Label htmlFor="edit-version" className="text-gray-700">Version</Label>
+                        <Input id="edit-version" name="version" defaultValue={editingApp?.version} required className="border-gray-300 focus:border-blue-500" />
                       </div>
                       <div>
-                        <Label htmlFor="edit-team" className="text-blue-600">Team</Label>
+                        <Label htmlFor="edit-team" className="text-gray-700">Team</Label>
                         <Select name="team" defaultValue={editingApp?.team} required>
-                          <SelectTrigger className="border-blue-300 focus:border-blue-500">
+                          <SelectTrigger className="border-gray-300 focus:border-blue-500">
                             <SelectValue placeholder="Select a team" />
                           </SelectTrigger>
                           <SelectContent>
@@ -156,8 +156,8 @@ const AppsList = () => {
                         </Select>
                       </div>
                       <div>
-                        <Label htmlFor="edit-namespace" className="text-blue-600">Namespace</Label>
-                        <Input id="edit-namespace" name="namespace" defaultValue={editingApp?.namespace} required className="border-blue-300 focus:border-blue-500" />
+                        <Label htmlFor="edit-namespace" className="text-gray-700">Namespace</Label>
+                        <Input id="edit-namespace" name="namespace" defaultValue={editingApp?.namespace} required className="border-gray-300 focus:border-blue-500" />
                       </div>
                       <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white">Update</Button>
                     </form>
@@ -169,7 +169,7 @@ const AppsList = () => {
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle className="text-blue-600">Are you sure?</AlertDialogTitle>
+                      <AlertDialogTitle className="text-gray-800">Are you sure?</AlertDialogTitle>
                       <AlertDialogDescription>
                         This action cannot be undone. This will permanently delete the app.
                       </AlertDialogDescription>
@@ -180,7 +180,7 @@ const AppsList = () => {
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
-                <Button variant="outline" size="sm" onClick={() => handlePublish(app.id)} className="text-blue-600 border-blue-300 hover:bg-blue-100">Publish</Button>
+                <Button variant="outline" size="sm" onClick={() => handlePublish(app.id)} className="text-green-600 border-green-300 hover:bg-green-50">Publish</Button>
               </TableCell>
             </TableRow>
           ))}
