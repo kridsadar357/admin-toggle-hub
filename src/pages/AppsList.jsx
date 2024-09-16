@@ -56,34 +56,34 @@ const AppsList = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6 bg-blue-50">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Apps</h1>
+        <h1 className="text-3xl font-bold text-blue-600">Apps</h1>
         <Dialog>
           <DialogTrigger asChild>
-            <Button>Upload New App</Button>
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white">Upload New App</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[700px]">
             <DialogHeader>
-              <DialogTitle>Upload New App</DialogTitle>
+              <DialogTitle className="text-2xl font-bold text-blue-600">Upload New App</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleUpload} className="space-y-4">
               <div>
-                <Label htmlFor="apk">APK File</Label>
-                <Input id="apk" name="apk" type="file" accept=".apk" required />
+                <Label htmlFor="apk" className="text-blue-600">APK File</Label>
+                <Input id="apk" name="apk" type="file" accept=".apk" required className="border-blue-300 focus:border-blue-500" />
               </div>
               <div>
-                <Label htmlFor="name">App Name</Label>
-                <Input id="name" name="name" required />
+                <Label htmlFor="name" className="text-blue-600">App Name</Label>
+                <Input id="name" name="name" required className="border-blue-300 focus:border-blue-500" />
               </div>
               <div>
-                <Label htmlFor="version">Version</Label>
-                <Input id="version" name="version" required />
+                <Label htmlFor="version" className="text-blue-600">Version</Label>
+                <Input id="version" name="version" required className="border-blue-300 focus:border-blue-500" />
               </div>
               <div>
-                <Label htmlFor="team">Team</Label>
+                <Label htmlFor="team" className="text-blue-600">Team</Label>
                 <Select name="team" required>
-                  <SelectTrigger>
+                  <SelectTrigger className="border-blue-300 focus:border-blue-500">
                     <SelectValue placeholder="Select a team" />
                   </SelectTrigger>
                   <SelectContent>
@@ -94,27 +94,27 @@ const AppsList = () => {
                 </Select>
               </div>
               <div>
-                <Label htmlFor="namespace">Namespace</Label>
-                <Input id="namespace" name="namespace" required />
+                <Label htmlFor="namespace" className="text-blue-600">Namespace</Label>
+                <Input id="namespace" name="namespace" required className="border-blue-300 focus:border-blue-500" />
               </div>
-              <Button type="submit">Upload</Button>
+              <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white">Upload</Button>
             </form>
           </DialogContent>
         </Dialog>
       </div>
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Version</TableHead>
-            <TableHead>Team</TableHead>
-            <TableHead>Namespace</TableHead>
-            <TableHead>Actions</TableHead>
+          <TableRow className="bg-blue-100">
+            <TableHead className="text-blue-600">Name</TableHead>
+            <TableHead className="text-blue-600">Version</TableHead>
+            <TableHead className="text-blue-600">Team</TableHead>
+            <TableHead className="text-blue-600">Namespace</TableHead>
+            <TableHead className="text-blue-600">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {apps.map((app) => (
-            <TableRow key={app.id}>
+            <TableRow key={app.id} className="hover:bg-blue-50">
               <TableCell>{app.name}</TableCell>
               <TableCell>{app.version}</TableCell>
               <TableCell>{app.team}</TableCell>
@@ -122,25 +122,25 @@ const AppsList = () => {
               <TableCell>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="outline" size="sm" className="mr-2" onClick={() => handleEdit(app)}>Edit</Button>
+                    <Button variant="outline" size="sm" className="mr-2 text-blue-600 border-blue-300 hover:bg-blue-100" onClick={() => handleEdit(app)}>Edit</Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[700px]">
                     <DialogHeader>
-                      <DialogTitle>Edit App</DialogTitle>
+                      <DialogTitle className="text-2xl font-bold text-blue-600">Edit App</DialogTitle>
                     </DialogHeader>
                     <form onSubmit={handleUpdate} className="space-y-4">
                       <div>
-                        <Label htmlFor="edit-name">App Name</Label>
-                        <Input id="edit-name" name="name" defaultValue={editingApp?.name} required />
+                        <Label htmlFor="edit-name" className="text-blue-600">App Name</Label>
+                        <Input id="edit-name" name="name" defaultValue={editingApp?.name} required className="border-blue-300 focus:border-blue-500" />
                       </div>
                       <div>
-                        <Label htmlFor="edit-version">Version</Label>
-                        <Input id="edit-version" name="version" defaultValue={editingApp?.version} required />
+                        <Label htmlFor="edit-version" className="text-blue-600">Version</Label>
+                        <Input id="edit-version" name="version" defaultValue={editingApp?.version} required className="border-blue-300 focus:border-blue-500" />
                       </div>
                       <div>
-                        <Label htmlFor="edit-team">Team</Label>
+                        <Label htmlFor="edit-team" className="text-blue-600">Team</Label>
                         <Select name="team" defaultValue={editingApp?.team} required>
-                          <SelectTrigger>
+                          <SelectTrigger className="border-blue-300 focus:border-blue-500">
                             <SelectValue placeholder="Select a team" />
                           </SelectTrigger>
                           <SelectContent>
@@ -151,10 +151,10 @@ const AppsList = () => {
                         </Select>
                       </div>
                       <div>
-                        <Label htmlFor="edit-namespace">Namespace</Label>
-                        <Input id="edit-namespace" name="namespace" defaultValue={editingApp?.namespace} required />
+                        <Label htmlFor="edit-namespace" className="text-blue-600">Namespace</Label>
+                        <Input id="edit-namespace" name="namespace" defaultValue={editingApp?.namespace} required className="border-blue-300 focus:border-blue-500" />
                       </div>
-                      <Button type="submit">Update</Button>
+                      <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white">Update</Button>
                     </form>
                   </DialogContent>
                 </Dialog>
@@ -164,18 +164,18 @@ const AppsList = () => {
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                      <AlertDialogTitle className="text-blue-600">Are you sure?</AlertDialogTitle>
                       <AlertDialogDescription>
                         This action cannot be undone. This will permanently delete the app.
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction onClick={() => handleDelete(app.id)}>Delete</AlertDialogAction>
+                      <AlertDialogAction onClick={() => handleDelete(app.id)} className="bg-red-600 hover:bg-red-700 text-white">Delete</AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
-                <Button variant="outline" size="sm" onClick={() => handlePublish(app.id)}>Publish</Button>
+                <Button variant="outline" size="sm" onClick={() => handlePublish(app.id)} className="text-blue-600 border-blue-300 hover:bg-blue-100">Publish</Button>
               </TableCell>
             </TableRow>
           ))}
